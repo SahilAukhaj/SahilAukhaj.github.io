@@ -1,0 +1,5 @@
+# Keep binary assets byte-exact regardless of core.autocrlf
+*.pdf binary
+*.png binary
+*.jpg binary
+*.webp binary
