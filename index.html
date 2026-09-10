@@ -1,0 +1,603 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sahil Aukhaj — Software Engineering Student</title>
+  <meta name="description" content="Portfolio and resume of Sahil Aukhaj, a third-year Software Engineering student at the University of Technology, Mauritius, building full-stack web, mobile, IoT and game projects.">
+  <meta name="author" content="Sahil Aukhaj">
+  <meta name="theme-color" content="#0c0c0c">
+  <link rel="canonical" href="https://sahilaukhaj.github.io/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sahilaukhaj.github.io/">
+  <meta property="og:title" content="Sahil Aukhaj — Software Engineering Student">
+  <meta property="og:description" content="Full-stack, mobile, IoT and game projects, internship experience and a one-page PDF resume.">
+  <meta property="og:image" content="https://sahilaukhaj.github.io/assets/img/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Silkscreen&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="preload" as="image" href="assets/img/sahil-hero.webp">
+
+  <script>
+    document.documentElement.classList.add('js');
+    // If the animation libraries never load, show the content anyway.
+    window.setTimeout(function () {
+      if (!window.__siteReady) document.documentElement.classList.add('no-anim');
+    }, 5000);
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Sahil Aukhaj",
+      "url": "https://sahilaukhaj.github.io/",
+      "email": "mailto:sahilaukhaj666@gmail.com",
+      "jobTitle": "Software Engineering Student",
+      "address": { "@type": "PostalAddress", "addressCountry": "MU" },
+      "affiliation": { "@type": "CollegeOrUniversity", "name": "University of Technology, Mauritius" },
+      "sameAs": ["https://github.com/SahilAukhaj"]
+    }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Preloader -->
+  <div class="preloader" aria-hidden="true">
+    <div class="preloader__fill"></div>
+    <p class="preloader__name u-pixel">Sahil Aukhaj — Portfolio</p>
+    <p class="preloader__count" data-preloader-count>000</p>
+    <p class="preloader__label u-mono">[ Loading resume ]</p>
+  </div>
+
+  <!-- Ticker -->
+  <div class="ticker" role="region" aria-label="Latest updates">
+    <div class="ticker__label u-mono"><span class="ticker__dot"></span>Latest</div>
+    <div class="ticker__track">
+      <ul class="ticker__list u-mono">
+        <li class="ticker__item">Currently in Year 3, Semester 1 — BSc (Hons) Software Engineering at UTM</li>
+        <li class="ticker__item">Completed a 15-week software engineering placement at Cybernex Solutions Ltd</li>
+        <li class="ticker__item">Now building my final year project: a smart pharmacy &amp; prescription validation system</li>
+        <li class="ticker__item">Open to internships &amp; junior developer roles</li>
+      </ul>
+      <ul class="ticker__list u-mono" aria-hidden="true">
+        <li class="ticker__item">Currently in Year 3, Semester 1 — BSc (Hons) Software Engineering at UTM</li>
+        <li class="ticker__item">Completed a 15-week software engineering placement at Cybernex Solutions Ltd</li>
+        <li class="ticker__item">Now building my final year project: a smart pharmacy &amp; prescription validation system</li>
+        <li class="ticker__item">Open to internships &amp; junior developer roles</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <a class="nav__logo u-pixel" href="#top" aria-label="Back to top">Aukhaj/26</a>
+  <nav class="nav" aria-label="Primary">
+    <button class="btn btn--dark" type="button" aria-expanded="false" aria-controls="menu" data-menu-toggle>
+      <span class="btn__label"><span data-text="Menu">Menu</span></span>
+    </button>
+    <a class="btn btn--dark" href="assets/Sahil_Aukhaj_Resume.pdf" target="_blank" rel="noopener">
+      <span class="btn__label"><span data-text="Resume.pdf">Resume.pdf</span></span>
+    </a>
+    <a class="btn btn--accent" href="#contact">
+      <span aria-hidden="true">→</span>
+      <span class="btn__label"><span data-text="Contact">Contact</span></span>
+    </a>
+  </nav>
+  <div class="menu" id="menu" data-menu>
+    <a class="menu__link" href="#about"><span class="u-display">About</span><span class="u-mono">(01)</span></a>
+    <a class="menu__link" href="#experience"><span class="u-display">Experience</span><span class="u-mono">(02)</span></a>
+    <a class="menu__link" href="#work"><span class="u-display">Work</span><span class="u-mono">(03)</span></a>
+    <a class="menu__link" href="#skills"><span class="u-display">Skills</span><span class="u-mono">(04)</span></a>
+    <a class="menu__link" href="#education"><span class="u-display">Education</span><span class="u-mono">(05)</span></a>
+    <a class="menu__link" href="#resume"><span class="u-display">Resume</span><span class="u-mono">(06)</span></a>
+    <a class="menu__link" href="#contact"><span class="u-display">Contact</span><span class="u-mono">(07)</span></a>
+    <div class="menu__foot u-mono"><span>Mauritius</span><span data-clock>--:--</span></div>
+  </div>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="stage" id="top" aria-label="Introduction">
+      <div class="stage__panel">
+        <div class="stage__media">
+          <svg class="stage__mask-defs" aria-hidden="true" focusable="false">
+            <defs>
+              <clipPath id="stage-mask" clipPathUnits="objectBoundingBox">
+                <rect data-tile x=".28" y="-.02" width=".40" height=".20" rx=".035" ry=".03"/>
+                <rect data-tile x="0" y=".20" width=".26" height=".42" rx=".035" ry=".03"/>
+                <rect data-tile x=".28" y=".20" width=".40" height=".42" rx=".035" ry=".03"/>
+                <rect data-tile x=".70" y=".20" width=".26" height=".42" rx=".035" ry=".03"/>
+                <rect data-tile x=".28" y=".64" width=".40" height=".38" rx=".035" ry=".03"/>
+              </clipPath>
+            </defs>
+          </svg>
+          <div class="stage__photo">
+            <img src="assets/img/sahil-hero.webp" width="1100" height="1411" alt="Portrait of Sahil Aukhaj" fetchpriority="high">
+          </div>
+        </div>
+
+        <div class="stage__content">
+          <svg class="stage__icon" viewBox="0 0 7 7" fill="currentColor" shape-rendering="crispEdges" aria-hidden="true"><path d="M3 0h1v1H3zM1 1h1v1H1zM3 1h1v1H3zM5 1h1v1H5zM2 2h3v1H2zM0 3h7v1H0zM2 4h3v1H2zM1 5h1v1H1zM3 5h1v1H3zM5 5h1v1H5zM3 6h1v1H3z"/></svg>
+          <p class="stage__eyebrow u-display" data-hero-line>Software engineering student</p>
+          <h1 class="stage__title u-display">
+            <span class="line"><span data-hero-title>Sahil</span></span>
+            <span class="line"><span data-hero-title>Aukhaj</span></span>
+          </h1>
+          <p class="stage__sub" data-hero-line>Third-year Software Engineering student at UTM, building full-stack web, mobile, IoT and game projects in Mauritius.</p>
+          <div class="stage__tags" data-hero-line>
+            <span class="tag tag--solid"><span class="tag__dot"></span>Open to internships</span>
+            <span class="tag">Year 3 · Semester 1</span>
+            <span class="tag">Mauritius · UTC+4</span>
+          </div>
+          <div class="stage__foot u-mono">
+            <span>MU <span data-clock>--:--</span></span>
+            <span class="stage__wordmark u-pixel">Aukhaj/26</span>
+            <a href="#about">Scroll ↓</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="section section--light intro" id="about">
+      <div class="intro__grid">
+        <div class="intro__label u-mono">
+          <span>(01) About</span>
+          <span class="u-grey">[ Who I am ]</span>
+        </div>
+        <p class="intro__text" data-words>I’m Sahil — a software engineering student who likes shipping complete things. From a Next.js healthcare platform built during my internship to an ESP32 pill dispenser, a WebRTC tank game and machine-learning models, I enjoy taking ideas from design to a working product.</p>
+      </div>
+      <div class="stats">
+        <div class="stat" data-reveal>
+          <p class="stat__value u-display"><span data-count="3" data-pad="2">03</span></p>
+          <p class="stat__label u-mono">Year of BSc (Hons) Software Engineering</p>
+        </div>
+        <div class="stat" data-reveal>
+          <p class="stat__value u-display"><span data-count="15">15</span></p>
+          <p class="stat__label u-mono">Commits shipped during my internship</p>
+        </div>
+        <div class="stat" data-reveal>
+          <p class="stat__value u-display"><span data-count="20">20</span>+</p>
+          <p class="stat__label u-mono">Projects built across web, mobile, IoT &amp; games</p>
+        </div>
+        <div class="stat" data-reveal>
+          <p class="stat__value u-display"><span data-count="12">12</span></p>
+          <p class="stat__label u-mono">Languages used in my projects</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="section section--dark xp" id="experience">
+      <div class="section-head">
+        <div>
+          <p class="section-head__meta u-mono"><span>(02) Experience</span><span>2023 — 2026</span></p>
+          <h2 class="section-head__title u-display" data-reveal>From Figma <span class="u-block">to <span class="u-accent">production</span></span></h2>
+        </div>
+        <p class="section-head__aside u-mono" data-reveal>A 15-week industrial placement: a real codebase, a real team and real users.</p>
+      </div>
+
+      <div class="xp__grid">
+        <figure class="device" data-reveal>
+          <div class="device__screen">
+            <img src="assets/img/morihealth-dashboard.webp" width="1600" height="1114" alt="MoriHealth doctor dashboard design with appointment stats and a trend chart" loading="lazy">
+          </div>
+          <div class="device__base"></div>
+          <figcaption class="device__caption u-mono"><span>MoriHealth — Doctor portal</span><span>Figma → Next.js</span></figcaption>
+        </figure>
+
+        <article class="job" data-reveal>
+          <div class="job__meta u-mono"><span>Feb 2026 — May 2026</span><span>Mauritius</span></div>
+          <h3 class="job__role u-display">Software Engineering Intern</h3>
+          <p class="job__company">Cybernex Solutions Ltd · MoriHealth web platform</p>
+          <ul class="job__list">
+            <li>Delivered doctor-portal and guest-site features in a multi-developer team using Next.js 15, React 19, TypeScript and Tailwind CSS — 15 commits via Git and GitHub.</li>
+            <li>Built the Doctor Dashboard, sidebar, Schedule and Appointments pages with stat cards, Recharts trend charts, Radix UI dialogs and toast notifications, prototyped first in Figma.</li>
+            <li>Rebuilt the guest pages — home, doctor finder with search and filters, FAQ and contact — with Framer Motion, Embla carousels and a responsive navbar and footer.</li>
+            <li>Fixed ESLint and production build errors and configured Next.js remote images.</li>
+          </ul>
+          <div class="chips">
+            <span class="tag">Next.js 15</span><span class="tag">React 19</span><span class="tag">TypeScript</span>
+            <span class="tag">Tailwind CSS</span><span class="tag">Recharts</span><span class="tag">Radix UI</span>
+            <span class="tag">Framer Motion</span><span class="tag">Figma</span><span class="tag">Git</span>
+          </div>
+        </article>
+      </div>
+
+      <div class="job job--compact" data-reveal>
+        <div>
+          <div class="job__meta u-mono"><span>Nov 2023 — Apr 2024</span><span>Mauritius</span></div>
+          <h3 class="job__role u-display">Storekeeper — Hyperpharm Ltd</h3>
+        </div>
+        <p class="job__note">Operated the inventory management system to generate supply tickets and track product data, and verified stock counts to resolve discrepancies — my first look at how real business systems depend on accurate data.</p>
+      </div>
+    </section>
+
+    <!-- Work -->
+    <section class="section section--dark work" id="work">
+      <div class="section-head">
+        <div>
+          <p class="section-head__meta u-mono"><span>(03) Selected work</span><span>2024 — 2026</span></p>
+          <h2 class="section-head__title u-display" data-reveal>Projects built <span class="u-block u-bracket u-accent">end to end</span></h2>
+        </div>
+        <p class="section-head__aside u-mono" data-reveal>Web · Mobile · IoT · AI · Games<br>Scroll to explore →</p>
+      </div>
+
+      <div class="work__viewport" data-work>
+        <div class="work__track" data-work-track>
+          <article class="card">
+            <div class="card__media card__media--phone">
+              <span class="card__badge u-mono">IoT · Team project</span>
+              <img src="assets/img/smart-pill-app.webp" width="700" height="1330" alt="Smart Pill Container app showing device status, adherence and compartment timers" loading="lazy">
+            </div>
+            <div class="card__body">
+              <div class="card__top u-mono"><span>(01)</span><span>IoT / Mobile</span></div>
+              <h3 class="card__title u-display">Smart Pill Container</h3>
+              <p class="card__desc">An ESP32 pill box that raises the right compartment on schedule, alerts with LEDs and a buzzer, detects whether the dose was taken with reed switches and reports to a Flutter caregiver app through Firebase.</p>
+              <div class="card__tags"><span class="tag">ESP32</span><span class="tag">C++</span><span class="tag">Flutter</span><span class="tag">Firebase</span></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card__media">
+              <div class="viz viz--api" aria-hidden="true">
+                <div class="viz__bar"><i></i><i></i><i></i></div>
+                <p class="api-line"><b class="m-get">GET</b><span>/api/userstories</span><span>Bearer</span></p>
+                <p class="api-line"><b class="m-post">POST</b><span>/api/userstories</span><span>—</span></p>
+                <p class="api-line"><b class="m-put">PUT</b><span>/api/userstories/{id}</span><span>—</span></p>
+                <p class="api-line"><b class="m-del">DEL</b><span>/api/userstories/{id}</span><span>—</span></p>
+                <p class="api-line"><b class="m-post">POST</b><span>/api/userstories/upload</span><span>JSON</span></p>
+                <p class="api-line"><b class="m-post">POST</b><span>/{id}/sync-to-jira</span><span>Jira</span></p>
+              </div>
+            </div>
+            <div class="card__body">
+              <div class="card__top u-mono"><span>(02)</span><span>Backend / API</span></div>
+              <h3 class="card__title u-display">ProjectPulse</h3>
+              <p class="card__desc">An ASP.NET Core 8 Web API for Agile user stories: CRUD with bearer-token auth, JSON file upload, Swagger docs and Jira REST sync — plus a C# console client and a React dashboard.</p>
+              <div class="card__tags"><span class="tag">C#</span><span class="tag">ASP.NET Core</span><span class="tag">EF Core</span><span class="tag">SQL Server</span><span class="tag">React</span></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card__media">
+              <div class="viz viz--qr" aria-hidden="true">
+                <div class="qr" data-qr></div>
+                <p class="viz__label u-mono">[ Scan · Explore · Collect ]</p>
+              </div>
+            </div>
+            <div class="card__body">
+              <div class="card__top u-mono"><span>(03)</span><span>Web / PWA</span></div>
+              <h3 class="card__title u-display">Mauritius Treasure Hunt</h3>
+              <p class="card__desc">An installable, offline-ready PWA that sends players around Mauritius to scan QR codes at real places, follow progress on a map and leave reviews — backed by a PHP/MySQL API and an admin panel.</p>
+              <div class="card__tags"><span class="tag">PHP</span><span class="tag">MySQL</span><span class="tag">JavaScript</span><span class="tag">PWA</span><span class="tag">Leaflet</span></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card__media">
+              <span class="card__badge u-mono">Game</span>
+              <img src="assets/img/tank-hero.webp" width="1280" height="720" alt="Tank Hero gameplay: a green tank on a pixel-art battlefield with health and fuel bars" loading="lazy">
+            </div>
+            <div class="card__body">
+              <div class="card__top u-mono"><span>(04)</span><span>Game / Multiplayer</span></div>
+              <h3 class="card__title u-display">Tank Hero</h3>
+              <p class="card__desc">A turn-based artillery duel with drag-to-aim projectile physics, fuel-limited movement, an AI opponent, six battlefields and online two-player matches over WebRTC.</p>
+              <div class="card__tags"><span class="tag">Construct 3</span><span class="tag">JavaScript</span><span class="tag">WebRTC</span><span class="tag">Android</span></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card__media">
+              <span class="card__badge u-mono">Game · Team of 3</span>
+              <img src="assets/img/samurai-honor-art.webp" width="1000" height="1000" alt="Samurai Honor key art: a samurai silhouette in front of a red sun" loading="lazy">
+              <img class="card__img-alt" src="assets/img/samurai-honor-gameplay.webp" width="1000" height="1000" alt="" loading="lazy">
+            </div>
+            <div class="card__body">
+              <div class="card__top u-mono"><span>(05)</span><span>Game / Platformer</span></div>
+              <h3 class="card__title u-display">Samurai Honor</h3>
+              <p class="card__desc">A 12-level pixel-art action platformer with three boss fights, a trader upgrade shop, star ratings, keyboard or touch controls and AdMob rewarded ads on Android.</p>
+              <div class="card__tags"><span class="tag">Construct 3</span><span class="tag">Game design</span><span class="tag">AdMob</span><span class="tag">Android</span></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card__media">
+              <span class="card__metric u-mono">R² 0.13 → 0.64</span>
+              <img src="assets/img/ml-regression.webp" width="1200" height="1010" alt="3D regression plane fitted to delivery data" loading="lazy">
+            </div>
+            <div class="card__body">
+              <div class="card__top u-mono"><span>(06)</span><span>Data / AI</span></div>
+              <h3 class="card__title u-display">Machine Learning Models</h3>
+              <p class="card__desc">Predicted food-delivery time on 45,593 orders with linear and polynomial regression, and classified smoking status on 44,552 health records with logistic regression and a neural network — 75.9% accuracy vs. a 63.3% baseline.</p>
+              <div class="card__tags"><span class="tag">Python</span><span class="tag">pandas</span><span class="tag">scikit-learn</span><span class="tag">Matplotlib</span></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card__media">
+              <div class="viz viz--wheel" aria-hidden="true"><div class="wheel"></div></div>
+            </div>
+            <div class="card__body">
+              <div class="card__top u-mono"><span>(07)</span><span>Desktop / Java</span></div>
+              <h3 class="card__title u-display">Tank Game 2D &amp; Roulette</h3>
+              <p class="card__desc">A two-player physics tank game with trajectories, collisions, fuel and destructible terrain, and an animated European roulette simulation with betting and game history — both in Java Swing.</p>
+              <div class="card__links">
+                <a class="link-arrow" href="https://github.com/SahilAukhaj/TankGame-UTM" target="_blank" rel="noopener">TankGame-UTM ↗</a>
+                <a class="link-arrow" href="https://github.com/SahilAukhaj/RouletteGame" target="_blank" rel="noopener">RouletteGame ↗</a>
+              </div>
+              <div class="card__tags"><span class="tag">Java</span><span class="tag">Swing</span><span class="tag">OOP</span></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card__media">
+              <div class="viz viz--wave" aria-hidden="true">
+                <div class="wave">
+                  <i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i><i style="--i:6"></i><i style="--i:7"></i><i style="--i:8"></i><i style="--i:9"></i><i style="--i:10"></i><i style="--i:11"></i>
+                </div>
+                <p class="viz__quote u-display">“Next step”</p>
+              </div>
+            </div>
+            <div class="card__body">
+              <div class="card__top u-mono"><span>(08)</span><span>Web / Voice</span></div>
+              <h3 class="card__title u-display">CookEase</h3>
+              <p class="card__desc">A team-built, hands-free recipe assistant for Mauritian cuisine: speech-to-text commands, spoken steps and timers, installable as an offline-capable PWA.</p>
+              <div class="card__tags"><span class="tag">JavaScript</span><span class="tag">Web Speech API</span><span class="tag">PHP</span><span class="tag">Firebase</span></div>
+            </div>
+          </article>
+
+          <article class="card card--end">
+            <p class="u-mono">(09) More on GitHub</p>
+            <h3 class="card__title u-display">See the code</h3>
+            <a class="link-arrow" href="https://github.com/SahilAukhaj" target="_blank" rel="noopener">github.com/SahilAukhaj ↗</a>
+          </article>
+        </div>
+        <div class="work__progress" aria-hidden="true"><span data-work-progress></span></div>
+      </div>
+
+      <div class="also" data-reveal>
+        <div class="also__head u-mono"><span>Also built</span><span>Coursework &amp; team projects</span></div>
+        <div class="also__row">
+          <span class="u-mono">(A)</span>
+          <h3 class="also__name u-display">Early Pest Detection</h3>
+          <p class="also__desc">Scrum team project: RTSP camera motion and leaf-damage detection, plus a Flask pest-identification web app.</p>
+          <span class="u-mono">Python · OpenCV · Flask</span>
+        </div>
+        <div class="also__row">
+          <span class="u-mono">(B)</span>
+          <h3 class="also__name u-display">MauritiusRatings</h3>
+          <p class="also__desc">Restaurant ratings Web API with a shared models library and a console client.</p>
+          <span class="u-mono">C# · ASP.NET Core</span>
+        </div>
+        <div class="also__row">
+          <span class="u-mono">(C)</span>
+          <h3 class="also__name u-display">Recycle Management</h3>
+          <p class="also__desc">Company dashboards, collection calendar and routes, with separate user and admin roles.</p>
+          <span class="u-mono">PHP · MySQL</span>
+        </div>
+        <div class="also__row">
+          <span class="u-mono">(D)</span>
+          <h3 class="also__name u-display">Insurance &amp; Pizza Databases</h3>
+          <p class="also__desc">Logical and relational data models, and Oracle Forms applications on top of them.</p>
+          <span class="u-mono">Oracle · PL/SQL</span>
+        </div>
+        <div class="also__row">
+          <span class="u-mono">(E)</span>
+          <h3 class="also__name u-display">Airline Management System</h3>
+          <p class="also__desc">System analysis and UML modelling for an airline booking and operations system.</p>
+          <span class="u-mono">UML · StarUML</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="section section--light skills" id="skills">
+      <div class="section-head">
+        <div>
+          <p class="section-head__meta u-mono"><span>(04) Skills</span><span>Used in real projects</span></p>
+          <h2 class="section-head__title u-display" data-reveal>The stack <span class="u-block">behind <span class="u-bracket">the work</span></span></h2>
+        </div>
+        <p class="section-head__aside u-mono" data-reveal>Every tool listed here shows up in a project on this page.</p>
+      </div>
+
+      <div class="skills__rows">
+        <div class="skill-row" data-reveal>
+          <span class="skill-row__index u-mono">(01)</span>
+          <h3 class="skill-row__title u-display">Languages</h3>
+          <div class="skill-row__tags"><span class="tag">Java</span><span class="tag">C#</span><span class="tag">TypeScript</span><span class="tag">JavaScript</span><span class="tag">Python</span><span class="tag">PHP</span><span class="tag">SQL</span><span class="tag">PL/SQL</span><span class="tag">Dart</span><span class="tag">C++</span><span class="tag">HTML</span><span class="tag">CSS</span></div>
+        </div>
+        <div class="skill-row" data-reveal>
+          <span class="skill-row__index u-mono">(02)</span>
+          <h3 class="skill-row__title u-display">Web &amp; Frontend</h3>
+          <div class="skill-row__tags"><span class="tag">Next.js</span><span class="tag">React</span><span class="tag">Tailwind CSS</span><span class="tag">Framer Motion</span><span class="tag">Recharts</span><span class="tag">Radix UI</span><span class="tag">PWAs</span><span class="tag">Web Speech API</span></div>
+        </div>
+        <div class="skill-row" data-reveal>
+          <span class="skill-row__index u-mono">(03)</span>
+          <h3 class="skill-row__title u-display">Backend &amp; APIs</h3>
+          <div class="skill-row__tags"><span class="tag">ASP.NET Core</span><span class="tag">Entity Framework Core</span><span class="tag">REST</span><span class="tag">Swagger / OpenAPI</span><span class="tag">Jira REST API</span><span class="tag">PHP APIs</span><span class="tag">Flask</span></div>
+        </div>
+        <div class="skill-row" data-reveal>
+          <span class="skill-row__index u-mono">(04)</span>
+          <h3 class="skill-row__title u-display">Mobile &amp; IoT</h3>
+          <div class="skill-row__tags"><span class="tag">Flutter</span><span class="tag">.NET MAUI</span><span class="tag">Android Studio</span><span class="tag">ESP32</span><span class="tag">Arduino</span><span class="tag">Firebase Realtime DB</span></div>
+        </div>
+        <div class="skill-row" data-reveal>
+          <span class="skill-row__index u-mono">(05)</span>
+          <h3 class="skill-row__title u-display">Data &amp; AI</h3>
+          <div class="skill-row__tags"><span class="tag">pandas</span><span class="tag">NumPy</span><span class="tag">scikit-learn</span><span class="tag">Matplotlib</span><span class="tag">OpenCV</span><span class="tag">Jupyter</span></div>
+        </div>
+        <div class="skill-row" data-reveal>
+          <span class="skill-row__index u-mono">(06)</span>
+          <h3 class="skill-row__title u-display">Databases</h3>
+          <div class="skill-row__tags"><span class="tag">MySQL</span><span class="tag">SQL Server</span><span class="tag">Oracle Database</span><span class="tag">Oracle Forms</span><span class="tag">ER modelling</span><span class="tag">Oracle Data Modeler</span></div>
+        </div>
+        <div class="skill-row" data-reveal>
+          <span class="skill-row__index u-mono">(07)</span>
+          <h3 class="skill-row__title u-display">Games</h3>
+          <div class="skill-row__tags"><span class="tag">Construct 3</span><span class="tag">Java Swing</span><span class="tag">WebRTC multiplayer</span><span class="tag">AdMob</span></div>
+        </div>
+        <div class="skill-row" data-reveal>
+          <span class="skill-row__index u-mono">(08)</span>
+          <h3 class="skill-row__title u-display">Tools &amp; Practice</h3>
+          <div class="skill-row__tags"><span class="tag">Git &amp; GitHub</span><span class="tag">Figma</span><span class="tag">Jira</span><span class="tag">Agile / Scrum</span><span class="tag">StarUML</span><span class="tag">VS Code</span><span class="tag">Visual Studio</span><span class="tag">IntelliJ IDEA</span><span class="tag">Wireshark</span><span class="tag">Cisco Packet Tracer</span></div>
+        </div>
+      </div>
+
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee__track">
+          <div class="marquee__group">
+            <span class="marquee__item u-display">Java</span><span class="marquee__item u-display">C#</span><span class="marquee__item u-display">TypeScript</span><span class="marquee__item u-display">Next.js</span><span class="marquee__item u-display">React</span><span class="marquee__item u-display">ASP.NET Core</span><span class="marquee__item u-display">Flutter</span><span class="marquee__item u-display">Python</span><span class="marquee__item u-display">PHP</span><span class="marquee__item u-display">MySQL</span><span class="marquee__item u-display">Firebase</span><span class="marquee__item u-display">ESP32</span>
+          </div>
+          <div class="marquee__group">
+            <span class="marquee__item u-display">Java</span><span class="marquee__item u-display">C#</span><span class="marquee__item u-display">TypeScript</span><span class="marquee__item u-display">Next.js</span><span class="marquee__item u-display">React</span><span class="marquee__item u-display">ASP.NET Core</span><span class="marquee__item u-display">Flutter</span><span class="marquee__item u-display">Python</span><span class="marquee__item u-display">PHP</span><span class="marquee__item u-display">MySQL</span><span class="marquee__item u-display">Firebase</span><span class="marquee__item u-display">ESP32</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section class="section section--light education" id="education">
+      <div class="edu">
+        <div>
+          <p class="section-head__meta u-mono"><span>(05) Education</span><span>2024 — Present</span></p>
+          <h2 class="edu__title u-display" data-reveal>University of Technology, <span class="u-bracket">Mauritius</span></h2>
+          <p class="edu__degree" data-reveal>BSc (Hons) Software Engineering — currently in Year 3, Semester 1.</p>
+          <div class="facts" data-reveal>
+            <div class="fact"><p class="fact__k u-mono">Programme</p><p class="fact__v u-display">BSc (Hons) SE</p></div>
+            <div class="fact"><p class="fact__k u-mono">Now</p><p class="fact__v u-display">Year 3 · Sem 1</p></div>
+            <div class="fact"><p class="fact__k u-mono">Placement</p><p class="fact__v u-display">15 weeks</p></div>
+          </div>
+          <div class="courses" data-reveal>
+            <span class="tag">Object-Oriented Programming</span><span class="tag">Database Systems</span><span class="tag">Operating Systems</span>
+            <span class="tag">Web Services</span><span class="tag">Advanced Web Development</span><span class="tag">Mobile Application Development</span>
+            <span class="tag">AI &amp; Machine Learning</span><span class="tag">Internet of Things</span><span class="tag">Software Security</span>
+            <span class="tag">Agile Methods</span><span class="tag">Game Development</span>
+          </div>
+        </div>
+
+        <article class="fyp" data-reveal>
+          <div class="fyp__media">
+            <img src="assets/img/fyp-architecture.webp" width="1400" height="1034" alt="Layered architecture diagram of the Smart Pharmacy system" loading="lazy">
+          </div>
+          <div class="fyp__body">
+            <div class="fyp__top u-mono"><span>Final year project</span><span class="status">In progress</span></div>
+            <h3 class="fyp__title u-display">Smart Pharmacy &amp; Prescription Validation</h3>
+            <p class="fyp__desc">A platform connecting patients with pharmacies: OCR prescription checks, drug-interaction warnings, generic alternatives, multi-pharmacy stock and price comparison, and an analytics dashboard.</p>
+            <div class="chips"><span class="tag">PHP REST API</span><span class="tag">MySQL</span><span class="tag">React</span><span class="tag">Tesseract OCR</span><span class="tag">Rule engine</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Resume -->
+    <section class="section section--dark" id="resume">
+      <div class="resume">
+        <a class="paper" href="assets/Sahil_Aukhaj_Resume.pdf" target="_blank" rel="noopener" data-reveal aria-label="Open the resume PDF in a new tab">
+          <span class="paper__sheet"><img src="assets/img/resume-preview.png" width="1075" height="1520" alt="Preview of Sahil Aukhaj's one-page resume" loading="lazy"></span>
+          <span class="paper__stamp u-mono">1 page · PDF</span>
+        </a>
+        <div>
+          <p class="section-head__meta u-mono"><span>(06) Resume</span><span>Updated Sep 2026</span></p>
+          <h2 class="resume__title u-display" data-reveal>Resume<span class="u-accent">.pdf</span></h2>
+          <p class="resume__lead" data-reveal>A clean, one-page, ATS-friendly version of everything on this site — ready to attach to an application.</p>
+          <ul class="resume__list u-mono" data-reveal>
+            <li><span>Format</span><span>A4 · 1 page · PDF</span></li>
+            <li><span>Layout</span><span>Single column · ATS-friendly</span></li>
+            <li><span>Includes</span><span>Education · Experience · Projects · Skills</span></li>
+          </ul>
+          <div class="resume__actions" data-reveal>
+            <a class="btn btn--accent btn--lg" href="assets/Sahil_Aukhaj_Resume.pdf" download>
+              <span aria-hidden="true">↓</span><span class="btn__label"><span data-text="Download PDF">Download PDF</span></span>
+            </a>
+            <a class="btn btn--outline btn--lg" href="assets/Sahil_Aukhaj_Resume.pdf" target="_blank" rel="noopener">
+              <span class="btn__label"><span data-text="Open in new tab">Open in new tab</span></span><span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section contact" id="contact">
+      <svg class="contact__icon" viewBox="0 0 7 7" fill="currentColor" shape-rendering="crispEdges" aria-hidden="true"><path d="M3 0h1v1H3zM1 1h1v1H1zM3 1h1v1H3zM5 1h1v1H5zM2 2h3v1H2zM0 3h7v1H0zM2 4h3v1H2zM1 5h1v1H1zM3 5h1v1H3zM5 5h1v1H5zM3 6h1v1H3z"/></svg>
+      <p class="u-mono u-grey" data-reveal>(07) Contact</p>
+      <h2 class="contact__title u-display" data-reveal>Let’s build <span class="u-block">something</span> <span class="u-block u-bracket u-accent">together</span></h2>
+      <p class="contact__lead" data-reveal>Open to software engineering internships, junior developer roles and interesting projects. Email is the fastest way to reach me.</p>
+      <div class="contact__actions" data-reveal>
+        <a class="btn btn--accent btn--lg" href="mailto:sahilaukhaj666@gmail.com">
+          <span aria-hidden="true">→</span><span class="btn__label"><span data-text="Email me">Email me</span></span>
+        </a>
+        <a class="btn btn--light btn--lg" href="tel:+23057566961">
+          <span class="btn__label"><span data-text="Call +230 5756 6961">Call +230 5756 6961</span></span>
+        </a>
+        <a class="btn btn--outline btn--lg" href="https://github.com/SahilAukhaj" target="_blank" rel="noopener">
+          <span class="btn__label"><span data-text="GitHub">GitHub</span></span><span aria-hidden="true">↗</span>
+        </a>
+      </div>
+      <div class="contact__grid" data-reveal>
+        <div class="contact__item">
+          <p class="contact__k u-mono">Email</p>
+          <a class="contact__v" href="mailto:sahilaukhaj666@gmail.com">sahilaukhaj666@gmail.com</a>
+          <button class="copy-btn u-mono" type="button" data-copy="sahilaukhaj666@gmail.com">Copy email</button>
+        </div>
+        <div class="contact__item">
+          <p class="contact__k u-mono">Phone</p>
+          <a class="contact__v" href="tel:+23057566961">+230 5756 6961</a>
+        </div>
+        <div class="contact__item">
+          <p class="contact__k u-mono">Location</p>
+          <p class="contact__v">Mauritius · <span data-clock>--:--</span></p>
+        </div>
+        <div class="contact__item">
+          <p class="contact__k u-mono">GitHub</p>
+          <a class="contact__v" href="https://github.com/SahilAukhaj" target="_blank" rel="noopener">github.com/SahilAukhaj</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__top">
+      <div>
+        <p class="footer__heading u-mono">Sahil Aukhaj</p>
+        <p class="footer__blurb">Software engineering student at the University of Technology, Mauritius — building for web, mobile, IoT and games.</p>
+      </div>
+      <div>
+        <p class="footer__heading u-mono">Sections</p>
+        <a class="footer__link u-display" href="#about">About</a>
+        <a class="footer__link u-display" href="#experience">Experience</a>
+        <a class="footer__link u-display" href="#work">Work</a>
+        <a class="footer__link u-display" href="#skills">Skills</a>
+      </div>
+      <div>
+        <p class="footer__heading u-mono">More</p>
+        <a class="footer__link u-display" href="#education">Education</a>
+        <a class="footer__link u-display" href="#resume">Resume</a>
+        <a class="footer__link u-display" href="#contact">Contact</a>
+      </div>
+      <div>
+        <p class="footer__heading u-mono">Elsewhere</p>
+        <a class="footer__link u-display" href="https://github.com/SahilAukhaj" target="_blank" rel="noopener">GitHub ↗</a>
+        <a class="footer__link u-display" href="mailto:sahilaukhaj666@gmail.com">Email</a>
+        <a class="footer__link u-display" href="assets/Sahil_Aukhaj_Resume.pdf" target="_blank" rel="noopener">Resume PDF ↗</a>
+      </div>
+    </div>
+    <div class="footer__bottom u-mono">
+      <span>© <span data-year>2026</span> Sahil Aukhaj</span>
+      <span>Mauritius · <span data-clock>--:--</span></span>
+      <a class="to-top" href="#top">Back to top ↑</a>
+    </div>
+    <p class="footer__wordmark" aria-hidden="true" data-fit>Sahil Aukhaj</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
