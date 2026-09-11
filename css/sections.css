@@ -20,10 +20,18 @@
 /* ---------- Experience ---------- */
 .xp__grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 5em; align-items: start; }
 
-/* Laptop: the lid hinges on the base; main.js ties its angle to the scroll position.
-   Perspective follows the laptop's width so the swing looks the same on every screen. */
+/* Laptop: the CSS version is the fallback and stays underneath for screen readers;
+   js/laptop3d.js draws the 3D one over it. The lid hinges on the base and main.js ties
+   its angle to the scroll. Perspective follows the laptop's width so the swing looks
+   the same on every screen. */
 .device { container-type: inline-size; }
-.device__laptop { perspective: 3200px; perspective: 500cqw; perspective-origin: 50% 90%; }
+.device__laptop { position: relative; perspective: 3200px; perspective: 500cqw; perspective-origin: 50% 90%; }
+/* The 3D canvas overhangs the laptop's box so the turning laptop is never cut off */
+.device__gl { position: absolute; inset: -14%; pointer-events: none; opacity: 0; }
+.device__gl canvas { display: block; width: 100%; height: 100%; }
+.device--3d .device__gl { opacity: 1; }
+.device--3d .device__lid,
+.device--3d .device__base { opacity: 0; }
 .device__lid { position: relative; transform-origin: 50% 100%; transform-style: preserve-3d; }
 .device__lid::after {
   content: "";
@@ -396,6 +404,7 @@ a.contact__v:hover { color: var(--color-accent); }
   .section-head__aside { text-align: left; }
   .job__role { font-size: 2.5em; }
   .device__base { margin: 0 -3%; }
+  .device__gl { inset: -14% -4%; }
   .work__track { flex-direction: column; width: auto; }
   .card { width: 100%; }
   .card--end .card__title { font-size: 3.5em; }

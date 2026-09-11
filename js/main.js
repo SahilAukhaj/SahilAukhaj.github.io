@@ -171,13 +171,42 @@
   }
 
   /* --------------------------------------------------------------- Laptop */
-  // The lid follows the scroll: scrolling down opens it and wakes the screen,
-  // scrolling back up closes it again, and it stays wherever the visitor stops.
+  // Scroll-scrubbed like the device on filmbot.com: the 3D laptop (js/laptop3d.js,
+  // three.js) starts turned away with its lid shut and ends facing the visitor,
+  // lid open and screen on. It loads as the section gets close; until then, or
+  // without WebGL, the CSS laptop's lid swings open instead.
   // Runs with reduced motion as well: it only moves while the visitor is scrolling.
   function laptop() {
     const lid = document.querySelector('[data-laptop-lid]');
     if (!lid) return;
-    gsap.timeline({
+    const figure = lid.closest('.device');
+    let fallback = lidSwing(lid);
+    if (!('WebGL2RenderingContext' in window && 'IntersectionObserver' in window)) return;
+
+    const nearby = new IntersectionObserver((entries) => {
+      if (!entries[0].isIntersecting) return;
+      nearby.disconnect();
+      import(new URL('js/laptop3d.js', document.baseURI).href)
+        .then(({ mountLaptop }) => mountLaptop(figure, {
+          gsap,
+          onLost: () => {
+            figure.classList.remove('device--3d');
+            fallback = lidSwing(lid);
+          },
+        }))
+        .then(() => {
+          fallback.scrollTrigger.kill();
+          fallback.kill();
+          figure.classList.add('device--3d');
+        })
+        .catch((error) => console.warn('3D laptop unavailable, keeping the CSS one.', error));
+    }, { rootMargin: '150% 0px' });
+    nearby.observe(figure);
+  }
+
+  // Without WebGL: the lid opens as the page scrolls down and closes again going up
+  function lidSwing(lid) {
+    return gsap.timeline({
       defaults: { ease: 'none' },
       scrollTrigger: { trigger: lid.parentElement, start: 'top 65%', end: 'top 10%', scrub: .8 },
     })
