@@ -20,7 +20,7 @@
 /* ---------- Experience ---------- */
 .xp__grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 5em; align-items: start; }
 
-/* Laptop: the lid hinges on the base; main.js swings it open when it scrolls into view.
+/* Laptop: the lid hinges on the base; main.js ties its angle to the scroll position.
    Perspective follows the laptop's width so the swing looks the same on every screen. */
 .device { container-type: inline-size; }
 .device__laptop { perspective: 3200px; perspective: 500cqw; perspective-origin: 50% 90%; }

@@ -171,17 +171,19 @@
   }
 
   /* --------------------------------------------------------------- Laptop */
-  // Swing the lid open and wake the screen as the laptop scrolls into view.
-  // Runs with reduced motion as well: it is one short movement, not a loop or parallax.
+  // The lid follows the scroll: scrolling down opens it and wakes the screen,
+  // scrolling back up closes it again, and it stays wherever the visitor stops.
+  // Runs with reduced motion as well: it only moves while the visitor is scrolling.
   function laptop() {
     const lid = document.querySelector('[data-laptop-lid]');
     if (!lid) return;
     gsap.timeline({
-      scrollTrigger: { trigger: lid.parentElement, start: 'top 80%', toggleActions: 'play none none reverse' },
+      defaults: { ease: 'none' },
+      scrollTrigger: { trigger: lid.parentElement, start: 'top 65%', end: 'top 10%', scrub: .8 },
     })
-      .fromTo(lid, { rotationX: -90 }, { rotationX: 0, duration: 1.8, ease: 'power3.inOut' }, 0)
-      .fromTo(lid.querySelector('.device__power'), { autoAlpha: .75 }, { autoAlpha: 0, duration: 1.2, ease: 'power1.inOut' }, .5)
-      .fromTo(lid.querySelector('.device__glare'), { xPercent: -100, autoAlpha: 1 }, { xPercent: 100, duration: 1.4, ease: 'power2.inOut' }, 1.1);
+      .fromTo(lid, { rotationX: -90 }, { rotationX: 0, duration: 1, ease: 'power1.inOut' }, 0)
+      .fromTo(lid.querySelector('.device__power'), { autoAlpha: .75 }, { autoAlpha: 0, duration: .5 }, .45)
+      .fromTo(lid.querySelector('.device__glare'), { xPercent: -100, autoAlpha: 1 }, { xPercent: 100, duration: .4 }, .6);
   }
 
   /* ---------------------------------------------------------- Text reveals */

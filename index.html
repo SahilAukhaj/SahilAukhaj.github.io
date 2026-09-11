@@ -10,6 +10,7 @@
   <link rel="canonical" href="https://sahilaukhaj.github.io/">
 
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Sahil Aukhaj">
   <meta property="og:url" content="https://sahilaukhaj.github.io/">
   <meta property="og:title" content="Sahil Aukhaj — Software Engineering Student">
   <meta property="og:description" content="Full-stack, mobile, IoT and game projects, internship experience and a one-page PDF resume.">
@@ -34,14 +35,42 @@
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Sahil Aukhaj",
-      "url": "https://sahilaukhaj.github.io/",
-      "email": "mailto:sahilaukhaj666@gmail.com",
-      "jobTitle": "Software Engineering Student",
-      "address": { "@type": "PostalAddress", "addressCountry": "MU" },
-      "affiliation": { "@type": "CollegeOrUniversity", "name": "University of Technology, Mauritius" },
-      "sameAs": ["https://github.com/SahilAukhaj"]
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://sahilaukhaj.github.io/#website",
+          "url": "https://sahilaukhaj.github.io/",
+          "name": "Sahil Aukhaj",
+          "alternateName": "Sahil Aukhaj Portfolio",
+          "inLanguage": "en"
+        },
+        {
+          "@type": "ProfilePage",
+          "@id": "https://sahilaukhaj.github.io/#profile",
+          "url": "https://sahilaukhaj.github.io/",
+          "name": "Sahil Aukhaj — Software Engineering Student",
+          "isPartOf": { "@id": "https://sahilaukhaj.github.io/#website" },
+          "dateCreated": "2026-09-10",
+          "dateModified": "2026-09-11",
+          "mainEntity": { "@id": "https://sahilaukhaj.github.io/#person" }
+        },
+        {
+          "@type": "Person",
+          "@id": "https://sahilaukhaj.github.io/#person",
+          "name": "Sahil Aukhaj",
+          "givenName": "Sahil",
+          "familyName": "Aukhaj",
+          "url": "https://sahilaukhaj.github.io/",
+          "image": "https://sahilaukhaj.github.io/assets/img/sahil-hero.webp",
+          "email": "mailto:sahilaukhaj666@gmail.com",
+          "jobTitle": "Software Engineering Student",
+          "description": "Third-year BSc (Hons) Software Engineering student at the University of Technology, Mauritius, building full-stack web, mobile, IoT and game projects.",
+          "address": { "@type": "PostalAddress", "addressCountry": "MU" },
+          "affiliation": { "@type": "CollegeOrUniversity", "name": "University of Technology, Mauritius" },
+          "knowsAbout": ["Software engineering", "Next.js", "React", "TypeScript", "C#", "ASP.NET Core", "Java", "Flutter", "Python", "ESP32"],
+          "sameAs": ["https://github.com/SahilAukhaj"]
+        }
+      ]
     }
   </script>
 </head>
