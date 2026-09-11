@@ -7,6 +7,7 @@
 
 :root {
   --color-accent: #ff4040;
+  --color-accent-soft: #e3bfb7;
   --color-bg-dark: #0c0c0c;
   --color-bg: #f9f8f8;
   --color-ink: #171717;
@@ -87,7 +88,7 @@ a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
 h1, h2, h3, h4, p, ul, ol, figure, blockquote { margin: 0; padding: 0; }
 ul, ol { list-style: none; }
-::selection { background: var(--color-accent); color: var(--color-ink); }
+::selection { background: var(--color-accent-soft); color: var(--color-ink); }
 :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
 section[id] { scroll-margin-top: var(--ticker-h); }
 
@@ -427,10 +428,10 @@ html.no-anim [data-reveal] { opacity: 1 !important; transform: none !important; 
   .preloader__count { font-size: 6em; }
 }
 
-/* Reduced motion: keep fades and hovers, stop looping decoration */
+/* Reduced motion: keep fades and hovers, stop looping decoration.
+   The ticker carries the latest news, so it keeps scrolling (hover pauses it). */
 @media (prefers-reduced-motion: reduce) {
   body::after { display: none; }
-  .ticker__track,
   .marquee__track,
   .wheel,
   .wave i,

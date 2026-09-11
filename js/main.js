@@ -48,6 +48,7 @@
 
   if (!reduced) heroScroll();
   wordsReveal();
+  laptop();
   if (!reduced) workTrack();
   reveals();
   counters();
@@ -167,6 +168,20 @@
     gsap.to(tiles[3], { attr: { x: .78 }, ease: 'none', scrollTrigger: scrub() });
     gsap.to(tiles[4], { attr: { y: .72 }, ease: 'none', scrollTrigger: scrub() });
     gsap.to('.stage__content', { yPercent: -6, ease: 'none', scrollTrigger: scrub() });
+  }
+
+  /* --------------------------------------------------------------- Laptop */
+  // Swing the lid open and wake the screen as the laptop scrolls into view.
+  // Runs with reduced motion as well: it is one short movement, not a loop or parallax.
+  function laptop() {
+    const lid = document.querySelector('[data-laptop-lid]');
+    if (!lid) return;
+    gsap.timeline({
+      scrollTrigger: { trigger: lid.parentElement, start: 'top 80%', toggleActions: 'play none none reverse' },
+    })
+      .fromTo(lid, { rotationX: -90 }, { rotationX: 0, duration: 1.8, ease: 'power3.inOut' }, 0)
+      .fromTo(lid.querySelector('.device__power'), { autoAlpha: .75 }, { autoAlpha: 0, duration: 1.2, ease: 'power1.inOut' }, .5)
+      .fromTo(lid.querySelector('.device__glare'), { xPercent: -100, autoAlpha: 1 }, { xPercent: 100, duration: 1.4, ease: 'power2.inOut' }, 1.1);
   }
 
   /* ---------------------------------------------------------- Text reveals */
