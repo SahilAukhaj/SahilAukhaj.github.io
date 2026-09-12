@@ -60,7 +60,7 @@
           "name": "Sahil Aukhaj — Software Engineering Student",
           "isPartOf": { "@id": "https://sahilaukhaj.github.io/#website" },
           "dateCreated": "2026-09-10",
-          "dateModified": "2026-09-11",
+          "dateModified": "2026-09-12",
           "mainEntity": { "@id": "https://sahilaukhaj.github.io/#person" }
         },
         {
@@ -225,12 +225,31 @@
           <div class="device__laptop">
             <div class="device__lid" data-laptop-lid>
               <div class="device__screen">
-                <img src="assets/img/morihealth-dashboard.webp" width="1600" height="1114" alt="MoriHealth doctor dashboard design with appointment stats and a trend chart" loading="lazy">
+                <video class="device__video" data-laptop-video width="1280" height="836" poster="assets/img/morihealth-dashboard.webp" muted loop playsinline preload="none" aria-label="Short video: a “Here’s the project” title card, then a tour of the MoriHealth doctor dashboard design with appointment stats and a trend chart">
+                  <source src="assets/video/morihealth-tour.mp4" type="video/mp4">
+                </video>
                 <span class="device__power" aria-hidden="true"></span>
                 <span class="device__glare" aria-hidden="true"></span>
               </div>
             </div>
             <div class="device__base"></div>
+            <div class="player" data-player>
+              <button class="player__big" type="button" data-player-toggle aria-label="Play video">
+                <svg viewBox="0 0 68 48" aria-hidden="true"><rect width="68" height="48" rx="13"/><path d="M27.5 14.5v19L44 24z"/></svg>
+              </button>
+              <div class="player__bar">
+                <div class="player__progress" data-player-progress>
+                  <span class="player__buffered"></span>
+                  <span class="player__played"></span>
+                  <input class="player__seek" type="range" min="0" max="1000" step="1" value="0" aria-label="Seek" data-player-seek>
+                  <span class="player__thumb"></span>
+                </div>
+                <button class="player__toggle" type="button" data-player-toggle aria-label="Play video">
+                  <svg class="player__icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13L18.5 12z"/></svg>
+                  <svg class="player__icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 5h4v14h-4zM13.5 5h4v14h-4z"/></svg>
+                </button>
+              </div>
+            </div>
           </div>
           <figcaption class="device__caption u-mono"><span>MoriHealth — Doctor portal</span><span>Figma → Next.js</span></figcaption>
         </figure>
@@ -275,9 +294,10 @@
       <div class="work__viewport" data-work>
         <div class="work__track" data-work-track>
           <article class="card">
-            <div class="card__media card__media--phone">
+            <div class="card__media">
               <span class="card__badge u-mono">IoT · Team project</span>
-              <img src="assets/img/smart-pill-app.webp" width="700" height="1330" alt="Smart Pill Container app showing device status, adherence and compartment timers" loading="lazy">
+              <img src="assets/img/smart-pill-app.webp" width="1200" height="900" alt="Smart Pill Container app screens: device status and adherence, a compartment timer and the dose history" loading="lazy">
+              <img class="card__img-alt" src="assets/img/smart-pill-hardware.webp" width="1200" height="900" alt="The prototype hardware: the cardboard pill container with its servos, and the ESP32 wiring on a breadboard" loading="lazy">
             </div>
             <div class="card__body">
               <div class="card__top u-mono"><span>(01)</span><span>IoT / Mobile</span></div>
@@ -323,14 +343,17 @@
           </article>
 
           <article class="card">
-            <div class="card__media">
+            <div class="card__media card__media--screen">
               <span class="card__badge u-mono">Game</span>
-              <img src="assets/img/tank-hero.webp" width="1280" height="720" alt="Tank Hero gameplay: a green tank on a pixel-art battlefield with health and fuel bars" loading="lazy">
+              <img src="assets/img/tank-hero.webp" width="1146" height="640" alt="Tank Hero gameplay: a green tank aiming at 33 degrees and full power on a pixel-art forest battlefield, with health and fuel bars" loading="lazy">
             </div>
             <div class="card__body">
               <div class="card__top u-mono"><span>(04)</span><span>Game / Multiplayer</span></div>
               <h3 class="card__title u-display">Tank Hero</h3>
               <p class="card__desc">A turn-based artillery duel with drag-to-aim projectile physics, fuel-limited movement, an AI opponent, six battlefields and online two-player matches over WebRTC.</p>
+              <div class="card__links">
+                <a class="link-arrow" href="https://tankhero-1000.netlify.app/" target="_blank" rel="noopener">Play in the browser ↗</a>
+              </div>
               <div class="card__tags"><span class="tag">Construct 3</span><span class="tag">JavaScript</span><span class="tag">WebRTC</span><span class="tag">Android</span></div>
             </div>
           </article>
@@ -339,7 +362,7 @@
             <div class="card__media">
               <span class="card__badge u-mono">Game · Team of 3</span>
               <img src="assets/img/samurai-honor-art.webp" width="1000" height="1000" alt="Samurai Honor key art: a samurai silhouette in front of a red sun" loading="lazy">
-              <img class="card__img-alt" src="assets/img/samurai-honor-gameplay.webp" width="1000" height="1000" alt="" loading="lazy">
+              <img class="card__img-alt" src="assets/img/samurai-honor-gameplay.webp" width="956" height="533" alt="Samurai Honor gameplay: the samurai facing a hooded enemy between gold coins, with touch controls" loading="lazy">
             </div>
             <div class="card__body">
               <div class="card__top u-mono"><span>(05)</span><span>Game / Platformer</span></div>
@@ -525,13 +548,13 @@
         </div>
 
         <article class="fyp" data-reveal>
-          <div class="fyp__media">
-            <img src="assets/img/fyp-architecture.webp" width="1400" height="1034" alt="Layered architecture diagram of the Smart Pharmacy system" loading="lazy">
-          </div>
+          <a class="fyp__media" href="assets/img/fyp-poster.webp" target="_blank" rel="noopener">
+            <img src="assets/img/fyp-poster.webp" width="1600" height="1132" alt="Project poster for the Smart Pharmacy system: its features, a sample prescription check flagging an ibuprofen and warfarin interaction, and the layered architecture. Opens full size in a new tab." loading="lazy">
+          </a>
           <div class="fyp__body">
             <div class="fyp__top u-mono"><span>Final year project</span><span class="status">In progress</span></div>
             <h3 class="fyp__title u-display">Smart Pharmacy &amp; Prescription Validation</h3>
-            <p class="fyp__desc">A platform connecting patients with pharmacies: OCR prescription checks, drug-interaction warnings, generic alternatives, multi-pharmacy stock and price comparison, and an analytics dashboard.</p>
+            <p class="fyp__desc">A management system for a single pharmacy: OCR prescription checks, drug-interaction warnings, generic alternatives, batch-level stock with expiry dates and reorder alerts, and an analytics dashboard.</p>
             <div class="chips"><span class="tag">PHP REST API</span><span class="tag">MySQL</span><span class="tag">React</span><span class="tag">Tesseract OCR</span><span class="tag">Rule engine</span></div>
           </div>
         </article>

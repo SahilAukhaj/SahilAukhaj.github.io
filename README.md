@@ -21,8 +21,11 @@ index.html          page markup
 css/style.css       tokens, type, buttons, preloader, ticker, menu, hero, intro
 css/sections.css    experience, work, skills, education, resume, contact, footer
 js/main.js          animations and small UI helpers
-assets/             resume PDF and optimised images
+js/laptop3d.js      three.js laptop in the experience section, with the project video on its screen
+assets/             resume PDF, optimised images and the laptop video
 ```
+
+Images come from `prepare_images.py`; the final year project poster and the laptop video come from `build_media.py` (both in `../resume-source`, outside this repo).
 
 ## Run locally
 

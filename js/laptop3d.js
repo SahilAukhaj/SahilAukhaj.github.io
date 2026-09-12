@@ -2,8 +2,10 @@
    3D laptop for the experience section, loaded on demand by main.js.
    The motion follows the device on filmbot.com: scrubbed by the scroll, the
    laptop starts turned away with its lid shut and ends facing the visitor
-   with the lid open and the screen on. The model is built from simple shapes
-   (no model file to download) and only renders when the scroll or size changes.
+   with the lid open and the screen on. Once it is open, main.js shows a video
+   player over the screen and the project video plays on it. The model is
+   built from simple shapes (no model file to download) and only renders when
+   the scroll, the size or the playing video changes.
    ========================================================================== */
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
@@ -16,7 +18,9 @@ const DEPTH = 2.2; // depth of the base and height of the lid
 const BASE_THICKNESS = 0.09;
 const LID_THICKNESS = 0.045;
 const HINGE_Y = BASE_THICKNESS + 0.018; // room for the keys under the shut lid
+const KEY_HEIGHT = 0.014;
 const BEZEL = { side: 0.1, top: 0.1, bottom: 0.14 };
+const SCREEN = { width: WIDTH - BEZEL.side * 2, height: DEPTH - BEZEL.top - BEZEL.bottom };
 
 // Keyboard rows in key widths, 15 to a row; 0 is the stacked up/down arrow pair
 const KEY_ROWS = [
@@ -28,21 +32,24 @@ const KEY_ROWS = [
   [1, 1, 1, 1.25, 5.5, 1.25, 1, 1, 0, 1],
 ];
 
-// Scroll timeline from 0 to 1, shaped like filmbot.com's device
-const START_TURN = { x: 0.5, y: 0.5, z: 0.1 }; // radians, eased back to face the camera
-const LID = { shut: Math.PI / 2, open: degToRad(-8), span: [0.1, 1] };
-const SCREEN_SPAN = [0.3, 0.8];
-const REFLECTION_TURN = [degToRad(-50), degToRad(40)];
-
+// The camera looks down on the open laptop so the keyboard shows, and the open
+// lid leans back by the same angle so the screen still faces the visitor squarely
+const CAMERA_TILT = degToRad(15);
 const FOV = 12;
-const CAMERA_TILT = degToRad(6);
 // How much of the CSS laptop's box the open laptop fills. It may run a little
 // taller, into the gap above and the caption's margin below.
-const FIT = { width: 0.96, height: 1.05 };
+const FIT = { width: 0.96, height: 1.12 };
 
-export async function mountLaptop(figure, { gsap, onLost }) {
+// Scroll timeline from 0 to 1, shaped like filmbot.com's device
+const START_TURN = { x: 0.5, y: 0.5, z: 0.1 }; // radians, eased back to face the camera
+const LID = { shut: Math.PI / 2, open: -CAMERA_TILT, span: [0.1, 1] };
+const SCREEN_SPAN = [0.3, 0.8];
+const REFLECTION_TURN = [degToRad(-50), degToRad(40)];
+const OPEN_AT = 0.97; // from here on the laptop counts as open and the play button shows
+
+export async function mountLaptop(figure, { gsap, onOpen, onLost }) {
   const box = figure.querySelector('.device__laptop');
-  const image = figure.querySelector('.device__screen img');
+  const video = figure.querySelector('.device__video');
   const holder = document.createElement('div');
   holder.className = 'device__gl';
   holder.setAttribute('aria-hidden', 'true');
@@ -54,7 +61,7 @@ export async function mountLaptop(figure, { gsap, onLost }) {
   let texture;
   try {
     renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-    texture = await new THREE.TextureLoader().loadAsync(image.currentSrc || image.src);
+    texture = await new THREE.TextureLoader().loadAsync(video.poster);
   } catch (error) {
     renderer?.dispose();
     holder.remove();
@@ -114,6 +121,10 @@ export async function mountLaptop(figure, { gsap, onLost }) {
     reach.x = Math.max(reach.x, -bounds.min.x, bounds.max.x);
     reach.y = Math.max(reach.y, -bounds.min.y, bounds.max.y);
   }
+  // The loop ends on the open pose: the corners of its screen frame the video player
+  const screenCorners = [[-1, -1], [1, -1], [-1, 1], [1, 1]].map(([x, y]) => (
+    model.screenMesh.localToWorld(new THREE.Vector3((x * SCREEN.width) / 2, (y * SCREEN.height) / 2, 0))
+  ));
 
   const camera = new THREE.PerspectiveCamera(FOV, 1, 0.1, 100);
   let frame = 0;
@@ -145,17 +156,72 @@ export async function mountLaptop(figure, { gsap, onLost }) {
     camera.position.y -= rise;
     camera.lookAt(0, -rise, 0);
     camera.updateProjectionMatrix();
+    camera.updateMatrixWorld();
+    // The video player's box: the open screen, in the laptop box's pixels
+    const xs = [];
+    const ys = [];
+    for (const corner of screenCorners) {
+      const at = corner.clone().project(camera);
+      xs.push(holder.offsetLeft + ((at.x + 1) / 2) * width);
+      ys.push(holder.offsetTop + ((1 - at.y) / 2) * height);
+    }
+    const left = Math.min(...xs);
+    const top = Math.min(...ys);
+    box.style.setProperty('--screen-left', `${left}px`);
+    box.style.setProperty('--screen-top', `${top}px`);
+    box.style.setProperty('--screen-width', `${Math.max(...xs) - left}px`);
+    box.style.setProperty('--screen-height', `${Math.max(...ys) - top}px`);
     render();
   }
 
+  // Video: while it plays, the screen shows its frames instead of the poster image
+  const videoTexture = new THREE.Texture(video);
+  videoTexture.colorSpace = THREE.SRGBColorSpace;
+  videoTexture.minFilter = THREE.LinearFilter;
+  videoTexture.generateMipmaps = false;
+  coverTop(videoTexture, SCREEN.width / SCREEN.height);
+  let playing = 0;
+  const playFrame = () => {
+    playing = requestAnimationFrame(playFrame);
+    if (video.readyState < video.HAVE_CURRENT_DATA) return;
+    videoTexture.needsUpdate = true;
+    renderer.render(scene, camera);
+  };
+  const onPlaying = () => {
+    model.screen.map = videoTexture;
+    if (!playing) playFrame();
+  };
+  const onPause = () => {
+    cancelAnimationFrame(playing);
+    playing = 0;
+  };
+  // Seeking while paused: show the new frame
+  const onSeeked = () => {
+    if (model.screen.map !== videoTexture || video.readyState < video.HAVE_CURRENT_DATA) return;
+    videoTexture.needsUpdate = true;
+    render();
+  };
+  video.addEventListener('playing', onPlaying);
+  video.addEventListener('pause', onPause);
+  video.addEventListener('seeked', onSeeked);
+
+  let isOpen;
   const progress = { value: 0 };
+  const update = () => {
+    pose(progress.value);
+    render();
+    if (isOpen !== progress.value > OPEN_AT) {
+      isOpen = progress.value > OPEN_AT;
+      if (onOpen) onOpen(isOpen);
+    }
+  };
   const tween = gsap.to(progress, {
     value: 1,
     ease: 'none',
-    onUpdate: () => { pose(progress.value); render(); },
+    onUpdate: update,
     scrollTrigger: { trigger: box, start: 'top 85%', end: 'center 50%', scrub: 0.8 },
   });
-  pose(progress.value);
+  update();
   resize();
   renderer.render(scene, camera);
 
@@ -165,6 +231,11 @@ export async function mountLaptop(figure, { gsap, onLost }) {
     tween.scrollTrigger.kill();
     tween.kill();
     resizer.disconnect();
+    onPause();
+    video.removeEventListener('playing', onPlaying);
+    video.removeEventListener('pause', onPause);
+    video.removeEventListener('seeked', onSeeked);
+    ['left', 'top', 'width', 'height'].forEach((side) => box.style.removeProperty(`--screen-${side}`));
     holder.remove();
     if (onLost) onLost();
   }, { once: true });
@@ -175,7 +246,7 @@ function buildLaptop(texture, anisotropy) {
   const aluminium = new THREE.MeshStandardMaterial({ color: 0xc2c5ca, metalness: 0.85, roughness: 0.36 });
   const rubber = new THREE.MeshStandardMaterial({ color: 0x0c0c0d, roughness: 0.6 });
   // A shade lighter than the keyboard well so the keys still read
-  const keycaps = new THREE.MeshStandardMaterial({ color: 0x1b1b1e, roughness: 0.5 });
+  const keycaps = new THREE.MeshStandardMaterial({ color: 0x222226, roughness: 0.55 });
   // Flat parts laid on another surface win the depth test against it
   const onSurface = { polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2 };
   const root = new THREE.Group();
@@ -221,14 +292,12 @@ function buildLaptop(texture, anisotropy) {
   );
   bezel.position.set(0, DEPTH / 2, 0.001);
 
-  const screenWidth = WIDTH - BEZEL.side * 2;
-  const screenHeight = DEPTH - BEZEL.top - BEZEL.bottom;
-  coverTop(texture, screenWidth / screenHeight);
+  coverTop(texture, SCREEN.width / SCREEN.height);
   texture.colorSpace = THREE.SRGBColorSpace;
   texture.anisotropy = anisotropy;
   const screenMaterial = new THREE.MeshBasicMaterial({ map: texture, color: 0x000000, toneMapped: false, ...onSurface });
-  const screen = new THREE.Mesh(new THREE.PlaneGeometry(screenWidth, screenHeight), screenMaterial);
-  screen.position.set(0, BEZEL.bottom + screenHeight / 2, 0.002);
+  const screen = new THREE.Mesh(new THREE.PlaneGeometry(SCREEN.width, SCREEN.height), screenMaterial);
+  screen.position.set(0, BEZEL.bottom + SCREEN.height / 2, 0.002);
 
   const webcam = new THREE.Mesh(
     new THREE.CircleGeometry(0.014, 16),
@@ -246,7 +315,7 @@ function buildLaptop(texture, anisotropy) {
   glass.position.set(0, DEPTH / 2, 0.004);
   lid.add(lidShell, bezel, screen, webcam, glass);
 
-  return { root, base, lid, lidShell, screen: screenMaterial };
+  return { root, base, lid, lidShell, screen: screenMaterial, screenMesh: screen };
 }
 
 function keyboard(material, centreZ) {
@@ -272,12 +341,23 @@ function keyboard(material, centreZ) {
     z += depth + gap;
   });
 
-  const mesh = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1), material, keys.length);
+  // One instanced mesh per key size, so every key keeps evenly rounded corners
+  const sizes = new Map();
+  for (const key of keys) {
+    const id = `${key[2].toFixed(4)}x${key[3].toFixed(4)}`;
+    if (!sizes.has(id)) sizes.set(id, []);
+    sizes.get(id).push(key);
+  }
+  const group = new THREE.Group();
   const matrix = new THREE.Matrix4();
-  keys.forEach(([x, keyZ, width, depth], index) => {
-    mesh.setMatrixAt(index, matrix.makeScale(width, 0.012, depth).setPosition(x, BASE_THICKNESS + 0.002, keyZ));
-  });
-  return mesh;
+  for (const list of sizes.values()) {
+    const [, , width, depth] = list[0];
+    const cap = slab(width, depth, KEY_HEIGHT, Math.min(width, depth) * 0.18, 0.003).rotateX(-Math.PI / 2);
+    const mesh = new THREE.InstancedMesh(cap, material, list.length);
+    list.forEach(([x, keyZ], index) => mesh.setMatrixAt(index, matrix.makeTranslation(x, BASE_THICKNESS + 0.001, keyZ)));
+    group.add(mesh);
+  }
+  return group;
 }
 
 /* ------------------------------------------------------------- Geometry */
@@ -310,7 +390,7 @@ function flat(shape) {
   return new THREE.ShapeGeometry(shape, 12).rotateX(-Math.PI / 2);
 }
 
-// Crop the screenshot like object-fit: cover, keeping its top edge
+// Crop the poster image or video like object-fit: cover, keeping its top edge
 function coverTop(texture, aspect) {
   const imageAspect = texture.image.width / texture.image.height;
   if (imageAspect > aspect) {

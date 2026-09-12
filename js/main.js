@@ -16,6 +16,7 @@
   initYear();
   initMenu();
   initCopy();
+  const laptopVideo = initLaptopVideo();
   initQr();
   initFitText();
 
@@ -174,13 +175,19 @@
   // Scroll-scrubbed like the device on filmbot.com: the 3D laptop (js/laptop3d.js,
   // three.js) starts turned away with its lid shut and ends facing the visitor,
   // lid open and screen on. It loads as the section gets close; until then, or
-  // without WebGL, the CSS laptop's lid swings open instead.
+  // without WebGL, the CSS laptop's lid swings open instead. Once the lid is fully
+  // open, the player for the project video shows (initLaptopVideo).
   // Runs with reduced motion as well: it only moves while the visitor is scrolling.
   function laptop() {
     const lid = document.querySelector('[data-laptop-lid]');
     if (!lid) return;
     const figure = lid.closest('.device');
-    let fallback = lidSwing(lid);
+    // Shutting the lid again hides the player and pauses the video
+    const setOpen = (open) => {
+      figure.classList.toggle('device--open', open);
+      if (laptopVideo) laptopVideo.setOpen(open);
+    };
+    let fallback = lidSwing(lid, setOpen);
     if (!('WebGL2RenderingContext' in window && 'IntersectionObserver' in window)) return;
 
     const nearby = new IntersectionObserver((entries) => {
@@ -189,9 +196,10 @@
       import(new URL('js/laptop3d.js', document.baseURI).href)
         .then(({ mountLaptop }) => mountLaptop(figure, {
           gsap,
+          onOpen: setOpen,
           onLost: () => {
             figure.classList.remove('device--3d');
-            fallback = lidSwing(lid);
+            fallback = lidSwing(lid, setOpen);
           },
         }))
         .then(() => {
@@ -205,10 +213,11 @@
   }
 
   // Without WebGL: the lid opens as the page scrolls down and closes again going up
-  function lidSwing(lid) {
+  function lidSwing(lid, onOpen) {
+    const opened = (self) => onOpen(self.progress > .97);
     return gsap.timeline({
       defaults: { ease: 'none' },
-      scrollTrigger: { trigger: lid.parentElement, start: 'top 65%', end: 'top 10%', scrub: .8 },
+      scrollTrigger: { trigger: lid.parentElement, start: 'top 65%', end: 'top 10%', scrub: .8, onUpdate: opened, onRefresh: opened },
     })
       .fromTo(lid, { rotationX: -90 }, { rotationX: 0, duration: 1, ease: 'power1.inOut' }, 0)
       .fromTo(lid.querySelector('.device__power'), { autoAlpha: .75 }, { autoAlpha: 0, duration: .5 }, .45)
@@ -345,6 +354,109 @@ function initCopy() {
       setTimeout(() => { button.textContent = original; }, 2000);
     });
   });
+}
+
+// YouTube-style player for the project video on the experience laptop: a big play button,
+// then a progress bar that also shows what has loaded, and a play/pause button. The video
+// loops, pauses while the lid is shut or the laptop is off screen, and carries on when it is
+// back. laptop() shows the player once the lid is fully open; js/laptop3d.js puts the video
+// on the 3D screen.
+function initLaptopVideo() {
+  const player = document.querySelector('[data-player]');
+  const video = document.querySelector('[data-laptop-video]');
+  if (!player || !video) return null;
+  const progress = player.querySelector('[data-player-progress]');
+  const seek = player.querySelector('[data-player-seek]');
+  const toggles = player.querySelectorAll('[data-player-toggle]');
+  const [big, small] = toggles;
+  let idleTimer = 0;
+  let frame = 0;
+  let pointer = 'mouse';
+
+  const toggle = () => (video.paused ? video.play().catch(() => {}) : video.pause());
+  // Like YouTube, the controls fade out while the pointer rests on a playing video
+  const setIdle = (idle) => player.classList.toggle('is-idle', idle && !video.paused);
+  const wake = () => {
+    setIdle(false);
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(() => setIdle(true), 2500);
+  };
+  const showTime = () => {
+    const played = video.duration ? video.currentTime / video.duration : 0;
+    progress.style.setProperty('--played', played);
+    if (document.activeElement !== seek) seek.value = Math.round(played * 1000);
+  };
+  const tick = () => {
+    showTime();
+    frame = requestAnimationFrame(tick);
+  };
+  const sync = () => {
+    const playing = !video.paused;
+    player.classList.toggle('is-playing', playing);
+    toggles.forEach((button) => button.setAttribute('aria-label', playing ? 'Pause video' : 'Play video'));
+    cancelAnimationFrame(frame);
+    if (playing) {
+      tick();
+      wake();
+    } else {
+      showTime();
+      setIdle(false);
+      player.classList.remove('is-loading');
+    }
+  };
+
+  toggles.forEach((button) => button.addEventListener('click', () => {
+    const moveFocus = button === big && big.matches(':focus-visible');
+    toggle();
+    // The big button hides once playing, so keyboard focus moves to the small one
+    if (moveFocus) requestAnimationFrame(() => small.focus({ preventScroll: true }));
+  }));
+  player.addEventListener('pointerdown', (event) => { pointer = event.pointerType; });
+  player.addEventListener('click', (event) => {
+    if (event.target !== player) return;
+    // On a touch screen, the first tap on a playing video brings the controls back
+    if (pointer !== 'mouse' && player.classList.contains('is-idle')) wake();
+    else toggle();
+  });
+  player.addEventListener('pointermove', (event) => { if (event.pointerType === 'mouse') wake(); });
+  player.addEventListener('pointerleave', () => setIdle(true));
+  player.addEventListener('focusin', wake);
+
+  video.addEventListener('play', () => {
+    player.classList.add('is-started');
+    player.classList.toggle('is-loading', video.readyState < video.HAVE_FUTURE_DATA);
+    sync();
+  });
+  video.addEventListener('pause', sync);
+  video.addEventListener('waiting', () => player.classList.add('is-loading'));
+  video.addEventListener('playing', () => player.classList.remove('is-loading'));
+  video.addEventListener('progress', () => {
+    const { buffered, duration } = video;
+    if (buffered.length && duration) progress.style.setProperty('--buffered', buffered.end(buffered.length - 1) / duration);
+  });
+  seek.addEventListener('input', () => {
+    if (video.duration) video.currentTime = (seek.value / 1000) * video.duration;
+    showTime();
+  });
+
+  // Pause while the lid is shut or the laptop is off screen, and carry on when it is back
+  const away = new Set();
+  let resume = false;
+  const setAway = (reason, isAway) => {
+    if (isAway) away.add(reason);
+    else away.delete(reason);
+    if (away.size && !video.paused) {
+      resume = true;
+      video.pause();
+    } else if (!away.size && resume) {
+      resume = false;
+      video.play().catch(() => {});
+    }
+  };
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(([entry]) => setAway('offscreen', !entry.isIntersecting)).observe(player.closest('.device'));
+  }
+  return { setOpen: (open) => setAway('shut', !open) };
 }
 
 // Decorative QR-style grid for the treasure hunt card (not a scannable code)
